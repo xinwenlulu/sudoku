@@ -71,4 +71,48 @@ void display_board(const char board[9][9]) {
   print_frame(9);
 }
 
-/* add your functions here */
+/* a Boolean function to check whether a sudoku board is completed (all positions occupied by digits) */
+bool is_complete(char board[9][9]){
+    bool complete = true;
+    for (int r=0; r<9; r++) { /* rows */
+        for (int n=0; n<9; n++) { /* columns */
+            if (board[r][n]=='.'){
+                complete = false;
+                break;
+            }
+        } /* columns */
+    }/* rows */
+      return complete;
+}
+
+/* a Boolean function that places a digit onto a Sudoku board at a given position */
+/* the board will be updated if placing of the digit at position is valid, and unaltered otherwise */
+bool make_move(char position,char digit,char board[9][9]){
+    /* converting position into array coordinates*/
+    //char pos = position;
+    //int row = pos[0] - 'A';
+    //int column = pos[1] - '1';
+    
+    /* if the position is valid then check whether placing of the digit at position is valid*/
+    //if (row < 0 || row > 8 || column < 0 || column > 8 ){
+    //    return false;
+    //} else{
+    //    if(any_of(board[row].begin(), board[row].end(), [](int i){return i==digit;})){
+    //        return false;
+    //    }else{
+            return true;
+    //    }
+    //}
+}
+
+/* a Boolean function to save the sudoku board ( in a 2D character array) to a file named filename */
+bool save_board(const char* filename, char board[9][9]){
+  return true;
+}
+
+/* a Boolean function to check whether a solution can be found for a given sudoku board */
+/* updates board if solution is found */
+bool solve_board(char board[9][9]){
+  return true;
+}
+
