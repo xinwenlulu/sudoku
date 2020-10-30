@@ -87,11 +87,11 @@ bool is_complete(char board[9][9]){
 
 /* a Boolean function that places a digit onto a Sudoku board at a given position */
 /* the board will be updated if placing of the digit at position is valid, and unaltered otherwise */
-bool make_move(char position,char digit,char board[9][9]){
+bool make_move(const char* position,char digit,char board[9][9]){
     /* converting position into array coordinates*/
     //char pos = position;
-    //int row = pos[0] - 'A';
-    //int column = pos[1] - '1';
+    int row = position[0] - 'A';
+    int column = position[1] - '1';
     
     /* if the position is valid then check whether placing of the digit at position is valid*/
     //if (row < 0 || row > 8 || column < 0 || column > 8 ){
@@ -107,6 +107,8 @@ bool make_move(char position,char digit,char board[9][9]){
 
 /* a Boolean function to save the sudoku board ( in a 2D character array) to a file named filename */
 bool save_board(const char* filename, char board[9][9]){
+  //ofstream boardTOsave;
+  //boardTOsave.open("filename");
   return true;
 }
 
