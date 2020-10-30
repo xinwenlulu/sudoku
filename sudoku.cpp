@@ -94,30 +94,26 @@ bool make_move(const char* position,char digit,char board[9][9]){
     int column = position[1] - '1';
     
     /* if the position is valid then check whether placing of the digit at position is valid*/
-    //if (row < 0 || row > 8 || column < 0 || column > 8 ){
-    //    return false;
-    //} else{
-    //    if(any_of(board[row].begin(), board[row].end(), [](int i){return i==digit;})){
-    //        return false;
-    //    }else{
-            return true;
-    //    }
-    //}
+    if (row < 0 || row > 8 || column < 0 || column > 8 ){
+        return false;
+    } else{
+        return true;
+    }
 }
 
 /* a Boolean function to save the sudoku board ( in a 2D character array) to a file named filename */
-bool save_board(const char* filename, const char board[9][9]){
+//bool save_board(const char* filename, const char board[9][9]){
   //ofstream output;
   //output.open(filename);
   //output << display_board(board)<<endl;
   //output.close();
-  return true;
-}
+  //return true;
+//}
 
 /* a Boolean function to check whether a solution can be found for a given sudoku board */
 /* updates board if solution is found */
-bool solve_board(char board[9][9]){
+//bool solve_board(char board[9][9]){
     
-  return true;
-}
+  //return true;
+//}
 
