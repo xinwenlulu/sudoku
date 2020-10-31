@@ -76,7 +76,8 @@ bool is_complete(char board[9][9]){
     bool complete = true;
     for (int r=0; r<9; r++) { // rows //
         for (int c=0; c<9; c++) { // columns //
-            if (board[r][c]=='.'){ // if not occupied by digits //
+            if (board[r][c]=='.' || board[r][c]=='0'){
+                // if not occupied by digits or 0s //
                 complete = false;
                 break;
             }
