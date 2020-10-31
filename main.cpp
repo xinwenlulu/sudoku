@@ -50,13 +50,13 @@ int main() {
 
   cout << "=================== Question 3 ===================" << "\n\n";
 
-  //load_board("easy.dat", board);
-  //if (save_board("easy-copy.dat", board)) {
-    //cout << "Save board to 'easy-copy.dat' successful." << '\n';
-  //} else {
-    //cout << "Save board failed." << '\n';
-  //}
-  //cout << '\n';
+  load_board("easy.dat", board);
+  if (save_board("easy-copy.dat", board)) {
+    cout << "Save board to 'easy-copy.dat' successful." << '\n';
+  } else {
+    cout << "Save board failed." << '\n';
+  }
+  cout << '\n';
 
   cout << "=================== Question 4 ===================" << "\n\n";
 

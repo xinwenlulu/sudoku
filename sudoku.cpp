@@ -133,13 +133,21 @@ bool make_move(const char* position,char digit,char board[9][9]){
 
 
 /* a Boolean function to save the sudoku board ( in a 2D character array) to a file named filename */
-//bool save_board(const char* filename, const char board[9][9]){
-  //ofstream output;
-  //output.open(filename);
-  //output << display_board(board)<<endl;
-  //output.close();
-  //return true;
-//}
+bool save_board(const char* filename, char board[9][9]){
+  ofstream boardTOsave(filename);
+  if (boardTOsave.is_open()){
+      for (int r = 0; r < 9; r++){
+          for (int c = 0; c < 9; c++){
+              boardTOsave << board[r][c];
+          }
+          boardTOsave << endl;
+      }
+      boardTOsave.close();
+      return true;
+  }else{
+      return false;
+  }  
+}
 
 /* a Boolean function to check whether a solution can be found for a given sudoku board */
 /* updates board if solution is found */
