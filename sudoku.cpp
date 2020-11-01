@@ -88,16 +88,17 @@ bool is_complete(char board[9][9]){
 
 /* a Boolean function that places a digit onto a Sudoku board at a given position */
 /* the board will be updated if placing of the digit at position is valid, and unaltered otherwise */
-bool make_move(const char* position,char digit,char board[9][9]){
+bool make_move(const char* position,const char digit,char board[9][9]){
     bool validity = true;
     // converting position into array coordinates //
-    int row = position[0] - 'A', column = position[1] - '1';
+    const int row = position[0] - 'A', column = position[1] - '1';
     
     // check the validity of position and placing of the digit at position //
     if (row < 0 || row > 8 || column < 0 || column > 8 ){ // if position invalid //
         validity = false;
-    }else{ // continue if position is valid //
-        
+    }else if (board[row][column]!='.'){ //already occupied //
+        validity = false;
+    }else{ // continue if position is valid and empty //
         // a sanity check: //
         // whether the position row and column already contain this digit //
         for (int i = 0; i < 9; i++){
@@ -131,28 +132,53 @@ bool make_move(const char* position,char digit,char board[9][9]){
     return validity;
 }
 
-
 /* a Boolean function to save the sudoku board ( in a 2D character array) to a file named filename */
 bool save_board(const char* filename, char board[9][9]){
   ofstream boardTOsave(filename);
   if (boardTOsave.is_open()){
-      for (int r = 0; r < 9; r++){
-          for (int c = 0; c < 9; c++){
+      for (int r = 0; r < 9; r++){ // rows //
+          for (int c = 0; c < 9; c++){ // columns //
               boardTOsave << board[r][c];
-          }
-          boardTOsave << endl;
-      }
+          } // columns //
+          boardTOsave << endl; // move to the next row //
+      } // rows //
       boardTOsave.close();
       return true;
-  }else{
+  }else{ //failed to open file for writing
       return false;
-  }  
+  }
 }
 
 /* a Boolean function to check whether a solution can be found for a given sudoku board */
 /* updates board if solution is found */
-//bool solve_board(char board[9][9]){
-    
-  //return true;
-//}
+bool solve_board(char board[9][9]){
+  bool solution = true;
+  if (is_complete(board)){
+      solution = true;
+  }else{
+      for (int r = 0; r < 9; r++){      // rows //
+          for (int c = 0; c < 9; c++){  // columns //
+              
+              if (board[r][c]=='.'){
+                  const char position[3] = {(char)('A'+ r),(char)('1'+c),'\0'};
+                  //try placing digit at position//
+                  for (char digit = '1'; digit <= '9'; digit ++){
+                      if (make_move(position,digit,board)){
+                          if (solve_board(board)){
+                              solution = true;
+                          //}else{
+                              //board[r][c]='.';
+                          }
+                      }
+                  }
+                  solution = false;
+                  break;
+              }
+              
+          }  // rows //
+      }  // columns //
+  }
+  return solution;
+}
+
 
