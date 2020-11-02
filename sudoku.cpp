@@ -137,6 +137,10 @@ bool save_board(const char* filename, char board[9][9]){
   return false;
 }
 
+
+/* initialisa a global variable that counts the number of recursions executed to solve the sudoku as an index for difficulty  */
+static int recursion = 0;
+
 /* a Boolean function to check whether a solution can be found for a given sudoku board */
 /* updates board if solution is found */
 
@@ -205,7 +209,7 @@ bool is_valid(int row,int column,char digit,char board[9][9]){
     return true;
 }
 
-/* a helper function to fetch the number of recursions excuted */
+/* a helper function to fetch the number of recursions executed */
 int print_recursion(){
     return recursion;
 }
