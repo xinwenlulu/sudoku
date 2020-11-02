@@ -93,10 +93,14 @@ bool is_complete(char board[9][9]){
 /* a Boolean function that places a digit onto a Sudoku board at a given position */
 /* the board will be updated if placing of the digit at position is valid, and unaltered otherwise */
 bool make_move(const char* position,const char digit,char board[9][9]){
+   
+    // sanity checks //
+    if (position[2]!='\0'){ //position too long e.g. "I80"//
+        return false;
+    }
+    
     // converting position into int coordinates for easy comparison //
     int row = position[0] - 'A', column = position[1] - '1';
-    
-    // sanity checks //
     if (row < 0 || row > 8 || column < 0 || column > 8 ){ // position reasonable?//
         return false;
     }

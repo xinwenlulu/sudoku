@@ -47,6 +47,14 @@ int main() {
   display_board(board);
 
   // write more tests //
+    load_board("easy.dat", board);
+    cout << "Putting '1' into I80 is ";
+    if (!make_move("I80", '1', board)) {
+      cout << "NOT ";
+    }
+    cout << "a valid move. The board is:" << '\n';
+    display_board(board);
+    
     cout << "Putting '1' into I8 again is ";
     if (!make_move("I8", '1', board)) {
       cout << "NOT ";
