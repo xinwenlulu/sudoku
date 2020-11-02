@@ -4,3 +4,4 @@ bool is_complete(char board[9][9]);
 bool make_move(const char* position,const char digit,char board[9][9]);
 bool save_board(const char* filename, char board[9][9]);
 bool solve_board(char board[9][9]);
+bool is_valid(int row,int column,char digit,char board[9][9]);

@@ -46,7 +46,28 @@ int main() {
   cout << "a valid move. The board is:" << '\n';
   display_board(board);
 
-  // write more tests
+  // write more tests //
+    cout << "Putting '1' into I8 again is ";
+    if (!make_move("I8", '1', board)) {
+      cout << "NOT ";
+    }
+    cout << "a valid move. The board is:" << '\n';
+    display_board(board);
+    
+    cout << "Putting '0' into A1 is ";
+    if (!make_move("A1", '0', board)) {
+      cout << "NOT ";
+    }
+    cout << "a valid move. The board is:" << '\n';
+    display_board(board);
+    
+    load_board("easy.dat", board);
+    cout << "Putting '1' into A1 is ";
+    if (!make_move("A1", '1', board)) {
+      cout << "NOT ";
+    }
+    cout << "a valid move. The board is:" << '\n';
+    display_board(board);
     
   cout << "=================== Question 3 ===================" << "\n\n";
 
@@ -69,17 +90,42 @@ int main() {
   }
   cout << '\n';
 
-  //load_board("medium.dat", board);
-  //if (solve_board(board)) {
-    //cout << "The 'medium' board has a solution:" << '\n';
-    //display_board(board);
-  //} else {
-    //cout << "A solution cannot be found." << '\n';
-  //}
-  //cout << '\n';
+  load_board("medium.dat", board);
+  if (solve_board(board)) {
+    cout << "The 'medium' board has a solution:" << '\n';
+    display_board(board);
+  } else {
+    cout << "A solution cannot be found." << '\n';
+  }
+  cout << '\n';
 
   // write more tests
-
+    load_board("mystery1.dat", board);
+    if (solve_board(board)) {
+      cout << "The 'mystery1' board has a solution:" << '\n';
+      display_board(board);
+    } else {
+      cout << "A solution cannot be found." << '\n';
+    }
+    cout << '\n';
+    
+    load_board("mystery2.dat", board);
+    if (solve_board(board)) {
+      cout << "The 'mystery2' board has a solution:" << '\n';
+      display_board(board);
+    } else {
+      cout << "A solution cannot be found." << '\n';
+    }
+    cout << '\n';
+    
+    load_board("mystery3.dat", board);
+    if (solve_board(board)) {
+      cout << "The 'mystery3' board has a solution:" << '\n';
+      display_board(board);
+    } else {
+      cout << "A solution cannot be found." << '\n';
+    }
+    cout << '\n';
   cout << "=================== Question 5 ===================" << "\n\n";
 
   // write more tests
