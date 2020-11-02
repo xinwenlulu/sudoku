@@ -100,35 +100,70 @@ int main() {
   cout << '\n';
 
   // write more tests
-    load_board("mystery1.dat", board);
+    
+  cout << "=================== Question 5 ===================" << "\n\n";
+
+  // write more tests
+    load_board("easy.dat", board);
+    reset_recursion();
     if (solve_board(board)) {
-      cout << "The 'mystery1' board has a solution:" << '\n';
+        cout << "After " << print_recursion() << " recursions, "<< endl;
+        cout << "the 'easy' board has a solution:" << '\n';
       display_board(board);
     } else {
+      cout << "After " << print_recursion() << " recursions, "<< endl;
+      cout << "A solution cannot be found." << '\n';
+    }
+    cout << '\n';
+    
+    load_board("medium.dat", board);
+    reset_recursion();
+    if (solve_board(board)) {
+        cout << "After " << print_recursion() << " recursions, "<< endl;
+        cout << "the 'medium' board has a solution:" << '\n';
+      display_board(board);
+    } else {
+      cout << "After " << print_recursion() << " recursions, "<< endl;
+      cout << "A solution cannot be found." << '\n';
+    }
+    cout << '\n';
+    
+    load_board("mystery1.dat", board);
+    reset_recursion();
+    if (solve_board(board)) {
+        cout << "After " << print_recursion() << " recursions, "<< endl;
+        cout << "the 'mystery1' board has a solution:" << '\n';
+      display_board(board);
+    } else {
+      cout << "After " << print_recursion() << " recursions, "<< endl;
       cout << "A solution cannot be found." << '\n';
     }
     cout << '\n';
     
     load_board("mystery2.dat", board);
+    reset_recursion();
     if (solve_board(board)) {
+      cout << "After " << print_recursion() << " recursions, "<< endl;
       cout << "The 'mystery2' board has a solution:" << '\n';
       display_board(board);
     } else {
+      cout << "After " << print_recursion() << " recursions, "<< endl;
       cout << "A solution cannot be found." << '\n';
     }
     cout << '\n';
     
     load_board("mystery3.dat", board);
+    reset_recursion();
     if (solve_board(board)) {
+      cout << "After " << print_recursion() << " recursions, "<< endl;
       cout << "The 'mystery3' board has a solution:" << '\n';
       display_board(board);
     } else {
+      cout << "After " << print_recursion() << " recursions, "<< endl;
       cout << "A solution cannot be found." << '\n';
     }
     cout << '\n';
-  cout << "=================== Question 5 ===================" << "\n\n";
-
-  // write more tests
 
   return 0;
 }
+

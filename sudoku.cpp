@@ -3,6 +3,7 @@
 #include <cstdio>
 #include <cstring>
 #include <cassert>
+#include <ctype.h>
 #include "sudoku.h"
 
 using namespace std;
@@ -71,14 +72,19 @@ void display_board(const char board[9][9]) {
   print_frame(9);
 }
 
-/* a Boolean function to check whether a sudoku board is completed (all positions occupied by digits) */
+/* a Boolean function to check whether a sudoku board is completed (all positions occupied by decimal digits from 1 to 9 ) */
 bool is_complete(char board[9][9]){
     for (int r=0; r<9; r++) { // rows //
         for (int c=0; c<9; c++) { // columns //
-            if (board[r][c]=='.' || board[r][c]=='0'){
-                // if not occupied by digits or 0s //
+            
+            if (!isdigit(board[r][c])){ //not a decimal digit: 0,1,2,3,4,5,6,7,8,9//
                 return false;
             }
+            
+            if ( board[r][c] == '0'){ // if occupied by 0 //
+                return false;
+            }
+            
         } // columns //
     }// rows //
     return true;
@@ -87,23 +93,28 @@ bool is_complete(char board[9][9]){
 /* a Boolean function that places a digit onto a Sudoku board at a given position */
 /* the board will be updated if placing of the digit at position is valid, and unaltered otherwise */
 bool make_move(const char* position,const char digit,char board[9][9]){
-    // converting position into array coordinates //
-    const int row = position[0] - 'A', column = position[1] - '1';
-    int num = digit - '0';
+    // converting position into int coordinates for easy comparison //
+    int row = position[0] - 'A', column = position[1] - '1';
     
-    // check the validity of position and placing of the digit at position //
-    if (row < 0 || row > 8 || column < 0 || column > 8 ){ // if position invalid //
-        return false;
-    }else if (num < 1 || num > 9){
-        return false;
-    }else if (board[row][column]!='.'){ //already occupied, don't overwrite! //
-        return false;
-    }else if (!is_valid(row,column,digit,board)){
-        // continue if position is valid and empty //
+    // sanity checks //
+    if (row < 0 || row > 8 || column < 0 || column > 8 ){ // position reasonable?//
         return false;
     }
     
-    // update board if the move is valid//
+    if (!isdigit(digit)||digit == '0'){ // illegal content for sudoku? //
+        return false;
+    }
+    
+    if (board[row][column]!='.'){ //already occupied, don't overwrite! //
+        return false;
+    }
+    
+    // continue if position is reasonable and empty and digit is legal //
+    if (!is_valid(row,column,digit,board)){
+        return false;
+    }
+    
+    // update board if the move is valid (after passing all the checks) //
     board[row][column] = digit;
     return true;
 }
@@ -128,7 +139,9 @@ bool save_board(const char* filename, char board[9][9]){
 
 /* a Boolean function to check whether a solution can be found for a given sudoku board */
 /* updates board if solution is found */
+
 bool solve_board(char board[9][9]){
+  // base case to exit recursion //
   if (is_complete(board)){
       return true;
   }
@@ -136,28 +149,33 @@ bool solve_board(char board[9][9]){
   for (int r = 0; r < 9; r++){      // rows //
       for (int c = 0; c < 9; c++){  // columns //
             
-            if (board[r][c]=='.'){
+            if (board[r][c]=='.'){  // if position is empty //
                 //try placing digit at position//
                 for (char digit = '1'; digit <= '9'; digit ++){
                     if (is_valid(r,c,digit,board)){
-                        board[r][c]=digit;
-                        if (solve_board(board)){
+                        board[r][c]=digit;  // update board if valid //
+                        recursion++; // increment recursion count //
+                        if (solve_board(board)){ // try solving updated board //
                             return true;
                         }
                     }
+                    // remove the assigned digit if the move is not valid //
+                    // restore the board to its previous state //
+                    // before trying the next digit//
                     board[r][c]='.';
                 }
+                // exhausted all possible digits and no solution //
                 return false;
             }
             
       }  // columns //
   }  // rows //
-  
-  return false;
+    
+  return false; // reached the end of the board and somehow still not completed//
 }
 
-/* helper function to check validity of move without passing char parameters*/
-/* assuming position valid and position empty */
+/* helper function to check validity of move without passing position in const char */
+/* assuming position valid, position empty and digit valid */
 bool is_valid(int row,int column,char digit,char board[9][9]){
     
     // check row //
@@ -187,3 +205,12 @@ bool is_valid(int row,int column,char digit,char board[9][9]){
     return true;
 }
 
+/* a helper function to fetch the number of recursions excuted */
+int print_recursion(){
+    return recursion;
+}
+
+/* a helper function to set the recursion count back to 0 when attempting a new baord */
+void reset_recursion(){
+    recursion = 0;
+}
